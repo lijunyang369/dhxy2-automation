@@ -1,15 +1,17 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Protocol
 
 from src.domain import MatchResult
+from src.perception.ocr_client import OCRServiceClient
+from src.perception.ocr_profiles import ocr_profile_for_module
 from src.perception.recognizer_models import (
     RecognitionModuleResult,
     RecognitionModuleSpec,
     RecognitionSnapshot,
 )
-from src.perception.round_recognition import RoundRecognitionService
 
 
 class RecognitionModule(Protocol):
@@ -92,37 +94,77 @@ class TemplatePresenceRecognizer:
 
 
 class BattleRoundRecognizer:
-    def __init__(self, spec: RecognitionModuleSpec, service: RoundRecognitionService | None = None) -> None:
+    def __init__(self, spec: RecognitionModuleSpec, ocr_client: OCRServiceClient | None = None) -> None:
         self.spec = spec
-        self._service = service or RoundRecognitionService()
+        self._ocr_client = ocr_client
 
     def recognize(self, snapshot: RecognitionSnapshot) -> RecognitionModuleResult:
         details = _default_details(snapshot, self.spec)
-        result = self._service.recognize(snapshot)
-        details.update(
-            {
-                "round_number": result.round_number,
-                "digits": list(result.digits),
-                "reason": result.reason,
-                "region": list(result.region) if result.region else None,
-                "locator_confidence": result.locator_confidence,
-                "image_quality_confidence": result.image_quality_confidence,
-                "digit_confidences": list(result.digit_confidences),
-                "overall_confidence": result.overall_confidence,
-                "sequence_confidence": result.sequence_confidence,
-                "digit_bounds": [list(bounds) for bounds in result.digit_bounds],
-                "candidate_scores": list(result.candidate_scores),
-            }
-        )
-        if not result.detected or result.round_number is None:
+        region = snapshot.named_regions.get(self.spec.region_name)
+        region_image = snapshot.region_image_for(self.spec.region_name)
+        details["region"] = list(region) if region is not None else None
+
+        if region is None or region_image is None:
             return RecognitionModuleResult(
                 module_id=self.spec.module_id,
                 label=self.spec.label,
                 region_name=self.spec.region_name,
                 mode=self.spec.mode,
                 detected=False,
-                confidence=result.overall_confidence,
-                summary=f"未识别到回合数: {result.reason}",
+                confidence=0.0,
+                summary="未识别到回合数: round region is not configured",
+                details=details,
+            )
+
+        if self._ocr_client is None:
+            details["reason"] = "ocr_service_disabled"
+            return RecognitionModuleResult(
+                module_id=self.spec.module_id,
+                label=self.spec.label,
+                region_name=self.spec.region_name,
+                mode=self.spec.mode,
+                detected=False,
+                confidence=0.0,
+                summary="未识别到回合数: ocr_service_disabled",
+                details=details,
+            )
+
+        profile = ocr_profile_for_module(self.spec.module_id)
+        ocr_result = self._ocr_client.read_text_from_image(
+            region_image,
+            allowlist=profile.allowlist if profile is not None else None,
+        )
+        details["ocr"] = ocr_result.to_dict()
+        if not ocr_result.ok:
+            details["reason"] = ocr_result.error_code or "ocr_failed"
+            return RecognitionModuleResult(
+                module_id=self.spec.module_id,
+                label=self.spec.label,
+                region_name=self.spec.region_name,
+                mode=self.spec.mode,
+                detected=False,
+                confidence=0.0,
+                summary=f"未识别到回合数: {details['reason']}",
+                details=details,
+            )
+
+        text = ocr_result.text.strip()
+        round_number, digits, parse_reason = _parse_round_text(text)
+        details["ocr_text"] = text
+        details["round_number"] = round_number
+        details["digits"] = list(digits)
+        details["overall_confidence"] = ocr_result.confidence
+        details["reason"] = parse_reason
+
+        if round_number is None:
+            return RecognitionModuleResult(
+                module_id=self.spec.module_id,
+                label=self.spec.label,
+                region_name=self.spec.region_name,
+                mode=self.spec.mode,
+                detected=False,
+                confidence=ocr_result.confidence,
+                summary=f"未识别到回合数: {parse_reason}",
                 details=details,
             )
 
@@ -132,13 +174,13 @@ class BattleRoundRecognizer:
             region_name=self.spec.region_name,
             mode=self.spec.mode,
             detected=True,
-            confidence=result.overall_confidence,
-            summary=f"识别到第 {result.round_number} 回合",
+            confidence=ocr_result.confidence,
+            summary=f"识别到第 {round_number} 回合",
             details=details,
         )
 
 
-def build_default_battle_recognizers() -> tuple[RecognitionModule, ...]:
+def build_default_battle_recognizers(ocr_client: OCRServiceClient | None = None) -> tuple[RecognitionModule, ...]:
     return (
         TemplatePresenceRecognizer(
             spec=RecognitionModuleSpec(
@@ -155,7 +197,8 @@ def build_default_battle_recognizers() -> tuple[RecognitionModule, ...]:
                 label="战斗回合识别",
                 region_name="round_number_region",
                 mode="round_recognition",
-            )
+            ),
+            ocr_client=ocr_client,
         ),
         TemplatePresenceRecognizer(
             spec=RecognitionModuleSpec(
@@ -197,8 +240,13 @@ def build_default_battle_recognizers() -> tuple[RecognitionModule, ...]:
 
 
 class BattleRecognitionSuite:
-    def __init__(self, modules: tuple[RecognitionModule, ...] | None = None) -> None:
-        self._modules = modules or build_default_battle_recognizers()
+    def __init__(
+        self,
+        modules: tuple[RecognitionModule, ...] | None = None,
+        *,
+        ocr_client: OCRServiceClient | None = None,
+    ) -> None:
+        self._modules = modules or build_default_battle_recognizers(ocr_client=ocr_client)
 
     @property
     def specs(self) -> tuple[RecognitionModuleSpec, ...]:
@@ -209,3 +257,34 @@ class BattleRecognitionSuite:
             module.spec.module_id: module.recognize(snapshot)
             for module in self._modules
         }
+
+
+_ROUND_TEXT_PATTERNS: tuple[tuple[str, re.Pattern[str]], ...] = (
+    (
+        "round_text_matched_full_pattern",
+        re.compile(r"\u7b2c\s*(\d{1,2})\s*\u56de\s*\u5408"),
+    ),
+    (
+        "round_text_matched_missing_suffix",
+        re.compile(r"\u7b2c\s*(\d{1,2})\s*\u56de"),
+    ),
+    (
+        "round_text_matched_missing_prefix",
+        re.compile(r"(?<!\d)(\d{1,2})\s*\u56de\s*\u5408"),
+    ),
+)
+
+
+def _normalize_round_text(text: str) -> str:
+    return re.sub(r"[\s:：,，;；|/\\\-_]+", "", text)
+
+
+def _parse_round_text(text: str) -> tuple[int | None, tuple[str, ...], str]:
+    normalized = _normalize_round_text(text)
+    for reason, pattern in _ROUND_TEXT_PATTERNS:
+        matched = pattern.search(normalized)
+        if matched is None:
+            continue
+        digits = matched.group(1)
+        return int(digits), tuple(digits), reason
+    return None, (), "ocr_text_has_no_structured_round"

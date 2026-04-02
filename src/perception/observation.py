@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 from src.domain import BattleObservation, MatchResult
 from src.perception.battle_recognizers import BattleRecognitionSuite
+from src.perception.ocr_client import OCRServiceClient
 from src.perception.recognizer_models import RecognitionModuleResult, RecognitionSnapshot
 from src.platform import FrameCapture, WindowInfo
 from src.platform.models import Rect
@@ -22,9 +23,14 @@ class ObservationSignalConfig:
 
 
 class ObservationBuilder:
-    def __init__(self, config: ObservationSignalConfig | None = None) -> None:
+    def __init__(
+        self,
+        config: ObservationSignalConfig | None = None,
+        *,
+        ocr_client: OCRServiceClient | None = None,
+    ) -> None:
         self._config = config or ObservationSignalConfig()
-        self._suite = BattleRecognitionSuite()
+        self._suite = BattleRecognitionSuite(ocr_client=ocr_client)
 
     @property
     def module_specs(self):

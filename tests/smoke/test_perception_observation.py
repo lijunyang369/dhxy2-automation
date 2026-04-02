@@ -6,6 +6,7 @@ from PIL import Image
 
 from src.domain import MatchResult
 from src.perception import ObservationBuilder, RegionCropper, RegionSpec
+from src.perception.ocr_models import OCRReadTextResult
 from src.platform import FrameCapture, Rect, WindowInfo
 
 
@@ -21,7 +22,18 @@ class ObservationBuilderTestCase(unittest.TestCase):
             is_visible=True,
             is_foreground=True,
         )
-        self.builder = ObservationBuilder()
+        class _FakeRoundOCRClient:
+            def read_text_from_image(self, image, *, allowlist=None, request_id=None):
+                return OCRReadTextResult(
+                    ok=True,
+                    text="第3回合",
+                    confidence=0.998,
+                    provider="fake",
+                    elapsed_ms=8,
+                    request_id=request_id,
+                )
+
+        self.builder = ObservationBuilder(ocr_client=_FakeRoundOCRClient())
 
     def test_build_sets_battle_flags_from_template_ids(self) -> None:
         matches = (
@@ -36,15 +48,21 @@ class ObservationBuilderTestCase(unittest.TestCase):
             matches=matches,
             named_regions={
                 "battle_main": Rect(0, 0, 100, 40),
+                "round_number_region": Rect(0, 0, 100, 40),
                 "battle_auto_button": Rect(120, 70, 180, 110),
                 "battle_prompt": Rect(10, 10, 100, 40),
                 "skill_bar": Rect(20, 60, 140, 100),
+            },
+            region_images={
+                "round_number_region": Image.new("RGB", (100, 40), color="black"),
             },
         )
 
         self.assertTrue(observation.battle_ui_visible)
         self.assertTrue(observation.action_prompt_visible)
         self.assertTrue(observation.skill_panel_visible)
+        self.assertTrue(observation.round_indicator_visible)
+        self.assertEqual(3, observation.round_number)
         self.assertFalse(observation.settlement_visible)
         self.assertEqual(self.frame.frame_hash, observation.frame_hash)
         self.assertAlmostEqual(0.9333, observation.confidence_summary, places=2)

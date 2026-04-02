@@ -23,6 +23,8 @@ from src.perception import (
     BattleButtonSemanticCatalog,
     TemplateCatalog,
 )
+from src.perception.ocr_client import OCRServiceClient
+from src.perception.ocr_models import OCRServiceConfig
 from src.platform import PyWin32WindowGateway, WindowSession
 from src.policy import (
     FixedActionRule,
@@ -145,6 +147,19 @@ def build_observation_pipeline(
     )
 
 
+def build_ocr_service_client(env_config: dict[str, Any]) -> OCRServiceClient | None:
+    payload = env_config.get("ocr_service")
+    if not isinstance(payload, dict):
+        return None
+    config = OCRServiceConfig(
+        enabled=bool(payload.get("enabled", False)),
+        base_url=str(payload.get("base_url", "http://127.0.0.1:18080")).rstrip("/"),
+        timeout_ms=int(payload.get("timeout_ms", 1500)),
+    )
+    if not config.enabled:
+        return None
+    return OCRServiceClient(config)
+
 def _build_executor(env_config: dict[str, Any]) -> ActionExecutor:
     button_calibration_path = env_config.get("button_calibration")
     button_calibration = None
@@ -172,6 +187,7 @@ def _build_observation_pipeline_from_configs(
     scenario_config: dict[str, Any],
     env_config: dict[str, Any],
 ) -> ObservationPipeline:
+    ocr_client = build_ocr_service_client(env_config)
     regions = tuple(
         RegionRequest(
             name=entry["name"],
@@ -182,7 +198,7 @@ def _build_observation_pipeline_from_configs(
     )
     dry_run = bool(env_config.get("dry_run", False))
     return ObservationPipeline(
-        builder=ObservationBuilder(),
+        builder=ObservationBuilder(ocr_client=ocr_client),
         config=DefaultObservationProviderConfig(regions=regions),
         template_matcher=_build_template_matcher(scenario_config, env_config, dry_run),
     )
