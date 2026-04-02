@@ -1,0 +1,12 @@
+﻿{
+  "character_id": "mage-default",
+  "role_type": "mage",
+  "skill_set": [
+    "primary_attack"
+  ],
+  "default_target_rule": "enemy_front",
+  "knowledge_refs": {
+    "character_system": "../knowledge/character-system.json",
+    "pet_system": "../knowledge/pet-system.json"
+  }
+}

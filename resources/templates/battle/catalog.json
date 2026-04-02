@@ -1,0 +1,31 @@
+{
+  "templates": [
+    {
+      "id": "battle_ui",
+      "file": "battle_ui_auto_button.png",
+      "scene": "battle",
+      "region": "battle_auto_button",
+      "threshold": 0.95,
+      "resolution": "1378x831",
+      "note": "Real battle auto button captured from live client."
+    },
+    {
+      "id": "battle_action_prompt",
+      "file": "battle_action_menu.png",
+      "scene": "battle",
+      "region": "battle_prompt",
+      "threshold": 0.95,
+      "resolution": "1378x831",
+      "note": "Real battle action menu captured from live client."
+    },
+    {
+      "id": "battle_skill_bar",
+      "file": "battle_skill_bar_real.png",
+      "scene": "battle",
+      "region": "skill_bar",
+      "threshold": 0.95,
+      "resolution": "1378x831",
+      "note": "Real battle quick skill bar captured from live client."
+    }
+  ]
+}

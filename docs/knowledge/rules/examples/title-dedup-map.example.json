@@ -1,0 +1,62 @@
+{
+  "generated_at": "2026-03-31",
+  "strategy": "prefer_complete_then_newer",
+  "duplicates": [
+    {
+      "title": "护身符",
+      "canonical": "/ziliao/647.html",
+      "aliases": [
+        "/ziliao/633.html"
+      ],
+      "reason": "内容几乎一致，647 更新时间更晚。"
+    },
+    {
+      "title": "靓号信笺",
+      "canonical": "/ziliao/576.html",
+      "aliases": [
+        "/ziliao/575.html"
+      ],
+      "reason": "主题相同，576 更新时间更晚。"
+    },
+    {
+      "title": "炼兽系统",
+      "canonical": "/ziliao/507.html",
+      "aliases": [
+        "/ziliao/506.html"
+      ],
+      "reason": "同主题跨栏目重复，507 位于召唤兽系统且更新时间更晚。"
+    },
+    {
+      "title": "龙族门派",
+      "canonical": "/ziliao/624.html",
+      "aliases": [
+        "/ziliao/594.html"
+      ],
+      "reason": "624 内容完整，594 接近空壳页。"
+    },
+    {
+      "title": "神兽系统",
+      "canonical": "/ziliao/603.html",
+      "aliases": [
+        "/ziliao/485.html"
+      ],
+      "reason": "603 有完整规则说明，485 基本为空。"
+    },
+    {
+      "title": "天书召唤兽",
+      "canonical": "/ziliao/611.html",
+      "aliases": [
+        "/ziliao/484.html"
+      ],
+      "reason": "611 内容完整，484 基本为空。"
+    },
+    {
+      "title": "新女鬼：镜花影",
+      "canonical": "/ziliao/562.html",
+      "aliases": [
+        "/ziliao/561.html"
+      ],
+      "reason": "两页内容高度相似，562 更新时间稍晚。"
+    }
+  ]
+}

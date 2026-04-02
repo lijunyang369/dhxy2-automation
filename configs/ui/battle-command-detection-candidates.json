@@ -1,0 +1,108 @@
+{
+  "version": 2,
+  "source": {
+    "type": "template_detection",
+    "template": "resources/templates/battle/battle_action_menu.png",
+    "profile_key": "character_battle_command_bar",
+    "evidence_frame": "runs/artifacts/probes/battle-command-rescreenshot.png",
+    "notes": "Detected from battle action menu template. These are recognition candidates, not confirmed click targets."
+  },
+  "profiles": {
+    "character_battle_command_bar": {
+      "label": "角色战斗指令",
+      "layout": {
+        "x": 1247,
+        "start_y": 267,
+        "step_y": 34,
+        "notes": "template-detected from battle_action_menu; review before promoting status"
+      },
+      "buttons": {
+        "spell": {
+          "label": "法术",
+          "status": "candidate",
+          "point": [1247, 267],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "item": {
+          "label": "道具",
+          "status": "candidate",
+          "point": [1247, 301],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "defend": {
+          "label": "防御",
+          "status": "candidate",
+          "point": [1247, 336],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "protect": {
+          "label": "保护",
+          "status": "candidate",
+          "point": [1247, 370],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "summon": {
+          "label": "召唤",
+          "status": "candidate",
+          "point": [1247, 405],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "recall": {
+          "label": "召还",
+          "status": "candidate",
+          "point": [1247, 439],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "catch": {
+          "label": "捕捉",
+          "status": "candidate",
+          "point": [1247, 473],
+          "notes": "template-detected candidate from battle_action_menu"
+        },
+        "escape": {
+          "label": "逃跑",
+          "status": "candidate",
+          "point": [1247, 508],
+          "notes": "template-detected candidate from battle_action_menu"
+        }
+      },
+      "seeded_buttons": {}
+    },
+    "pet_battle_command_bar": {
+      "label": "宠物战斗指令",
+      "layout": {
+        "x": 1300,
+        "start_y": 295,
+        "step_y": 30,
+        "notes": "seeded from confirmed pet battle command screenshot; top-to-bottom rows are spell/item/defend/protect"
+      },
+      "buttons": {
+        "spell": {
+          "label": "法术",
+          "status": "candidate",
+          "point": [1300, 295],
+          "notes": "pet battle command candidate from confirmed screenshot row 1"
+        },
+        "item": {
+          "label": "道具",
+          "status": "candidate",
+          "point": [1300, 325],
+          "notes": "pet battle command candidate from confirmed screenshot row 2"
+        },
+        "defend": {
+          "label": "防御",
+          "status": "candidate",
+          "point": [1300, 355],
+          "notes": "pet battle command candidate from confirmed screenshot row 3"
+        },
+        "protect": {
+          "label": "保护",
+          "status": "candidate",
+          "point": [1300, 385],
+          "notes": "pet battle command candidate from confirmed screenshot row 4"
+        }
+      },
+      "seeded_buttons": {}
+    }
+  }
+}

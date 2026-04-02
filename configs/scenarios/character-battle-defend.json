@@ -1,0 +1,59 @@
+{
+  "scenario_id": "character-battle-defend",
+  "initial_state": "ROUND_ACTIONABLE",
+  "primary_rule": {
+    "action_type": "CLICK_UI_BUTTON",
+    "reason": "fixed_character_battle_defend_button",
+    "target": "character_battle_command_bar",
+    "parameters": {
+      "button_ref": "battle_command_bar.defend"
+    }
+  },
+  "regions": [
+    {
+      "name": "battle_main",
+      "rect": [0, 0, 180, 120],
+      "use_template_match": false
+    },
+    {
+      "name": "round_number_region",
+      "rect": [0, 0, 180, 120],
+      "use_template_match": false
+    },
+    {
+      "name": "battle_auto_button",
+      "rect": [1290, 700, 1368, 750],
+      "use_template_match": true
+    },
+    {
+      "name": "battle_prompt",
+      "rect": [1170, 245, 1320, 530],
+      "use_template_match": true
+    },
+    {
+      "name": "skill_bar",
+      "rect": [950, 680, 1378, 831],
+      "use_template_match": true
+    }
+  ],
+  "mock_matches": {
+    "battle_auto_button": [
+      {
+        "template_id": "battle_ui",
+        "confidence": 0.96
+      }
+    ],
+    "battle_prompt": [
+      {
+        "template_id": "battle_action_prompt",
+        "confidence": 0.94
+      }
+    ],
+    "skill_bar": [
+      {
+        "template_id": "battle_skill_bar",
+        "confidence": 0.92
+      }
+    ]
+  }
+}

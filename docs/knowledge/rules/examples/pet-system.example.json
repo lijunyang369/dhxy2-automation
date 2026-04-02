@@ -1,0 +1,57 @@
+{
+  "source": [
+    {
+      "page": "召唤兽系统",
+      "url": "https://dh2.baike.163.com/ziliao/14.html",
+      "updated_at": "2017-05-26 15:00:19"
+    },
+    {
+      "page": "召唤兽携带限制",
+      "url": "https://dh2.baike.163.com/ziliao/483.html",
+      "updated_at": "2015-10-23 05:44:05"
+    }
+  ],
+  "domain": "pet_system",
+  "core_fields": [
+    "pet_name",
+    "level",
+    "base_stats",
+    "growth_rate",
+    "allocated_points",
+    "skills",
+    "intimacy",
+    "dragon_bone",
+    "neidan"
+  ],
+  "base_formula_inputs": [
+    "初值",
+    "等级",
+    "成长率",
+    "属性点"
+  ],
+  "validation_rules": [
+    {
+      "rule_id": "pet.carry_limit",
+      "description": "召唤兽携带受角色等级和转生阶段约束。",
+      "status": "partially_confirmed",
+      "details": {
+        "check_entry": "游戏界面左上角 -> 指引 -> 召唤兽",
+        "trade_limit": "高于30级的召唤兽不能交易",
+        "carry_count_by_stage": {
+          "未转": 5,
+          "一转": 8,
+          "二转": 8
+        },
+        "notes": [
+          "未转角色仅能置于自身15级以下的召唤兽。",
+          "页面为规则图，后续如需完整表格可继续补更细字段。"
+        ]
+      }
+    },
+    {
+      "rule_id": "pet.power_requires_growth_data",
+      "description": "不能只按召唤兽名字判断强弱，必须读取成长和养成字段。",
+      "status": "seed"
+    }
+  ]
+}

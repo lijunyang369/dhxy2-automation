@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "source": {
+    "page": "游戏界面",
+    "url": "https://dh2.baike.163.com/ziliao/464.html",
+    "updated_at": "2015-10-22 16:03:28",
+    "content_type": "annotated_image"
+  },
+  "regions": {
+    "top_bar": {
+      "description": "顶部功能入口区",
+      "entries": [
+        {
+          "label": "世界地图",
+          "config_ref": null
+        },
+        {
+          "label": "当前地图",
+          "config_ref": null
+        },
+        {
+          "label": "排行榜",
+          "config_ref": null
+        },
+        {
+          "label": "多宝商城",
+          "config_ref": null
+        },
+        {
+          "label": "召唤兽",
+          "config_ref": "nonbattle_toolbar.pet_panel"
+        },
+        {
+          "label": "角色",
+          "config_ref": null
+        }
+      ]
+    },
+    "right_side": {
+      "description": "右侧状态与社交入口区",
+      "entries": [
+        {
+          "label": "经验",
+          "config_ref": null
+        },
+        {
+          "label": "气血",
+          "config_ref": null
+        },
+        {
+          "label": "魔法",
+          "config_ref": null
+        },
+        {
+          "label": "帮派",
+          "config_ref": "nonbattle_toolbar.guild_panel"
+        },
+        {
+          "label": "好友",
+          "config_ref": "nonbattle_toolbar.friend_panel"
+        },
+        {
+          "label": "系统设置",
+          "config_ref": "nonbattle_toolbar.system_panel"
+        }
+      ]
+    },
+    "bottom_toolbar": {
+      "description": "底部主工具栏",
+      "layout_ref": "nonbattle_toolbar.layout",
+      "entries": [
+        {
+          "label": "功绩册",
+          "config_ref": null
+        },
+        {
+          "label": "宝宝",
+          "config_ref": "nonbattle_toolbar.pet_panel"
+        },
+        {
+          "label": "道具",
+          "config_ref": "nonbattle_toolbar.bag_panel"
+        },
+        {
+          "label": "组队",
+          "config_ref": "nonbattle_toolbar.team_panel"
+        },
+        {
+          "label": "攻击",
+          "config_ref": "nonbattle_toolbar.attack_mode"
+        },
+        {
+          "label": "交易",
+          "config_ref": null
+        },
+        {
+          "label": "技能",
+          "config_ref": "nonbattle_toolbar.skill_panel"
+        },
+        {
+          "label": "飞行坐骑",
+          "config_ref": "nonbattle_toolbar.mount_panel"
+        },
+        {
+          "label": "任务",
+          "config_ref": "nonbattle_toolbar.task_panel"
+        },
+        {
+          "label": "好友",
+          "config_ref": "nonbattle_toolbar.friend_panel"
+        },
+        {
+          "label": "帮派",
+          "config_ref": "nonbattle_toolbar.guild_panel"
+        },
+        {
+          "label": "系统",
+          "config_ref": "nonbattle_toolbar.system_panel"
+        }
+      ]
+    },
+    "bottom_left": {
+      "description": "左下交流区",
+      "entries": [
+        {
+          "label": "频道选择",
+          "config_ref": null
+        },
+        {
+          "label": "聊天输入框",
+          "config_ref": null
+        }
+      ]
+    },
+    "left_side": {
+      "description": "左侧提示区",
+      "entries": [
+        {
+          "label": "活动提示",
+          "config_ref": null
+        },
+        {
+          "label": "新手指引",
+          "config_ref": null
+        }
+      ]
+    }
+  },
+  "notes": [
+    "该文件是与 button-calibration 对齐的映射草案，不直接参与当前运行。",
+    "config_ref 为 null 的入口，表示当前项目尚未建立可点击或可识别配置。",
+    "后续若建立 top_bar/right_side 模块，可沿用这里的区域命名。"
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "source": {
+    "site": "dh2.baike.163.com",
+    "page": "快捷键",
+    "url": "https://dh2.baike.163.com/ziliao/470.html",
+    "updated_at": "2015-10-22 16:23:14"
+  },
+  "domain": "ui_control",
+  "contexts": {
+    "nonbattle": {
+      "panel_shortcuts": [
+        {
+          "key": "Alt+I",
+          "target": "bag_panel"
+        },
+        {
+          "key": "Alt+T",
+          "target": "team_panel"
+        },
+        {
+          "key": "Alt+F",
+          "target": "friend_panel"
+        },
+        {
+          "key": "Alt+P",
+          "target": "pet_panel"
+        }
+      ]
+    }
+  },
+  "notes": [
+    "当前只固化百科中明确出现的快捷键。",
+    "后续需要结合客户端实测，校验不同窗口焦点下的可用性。"
+  ]
+}

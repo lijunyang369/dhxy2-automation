@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "source": {
+    "page": "游戏界面 / 基本操作 / 战斗指令栏",
+    "refs": [
+      "docs/knowledge/rules/examples/ui-main-interface.example.json",
+      "docs/knowledge/rules/examples/ui-basic-actions.example.json",
+      "resources/templates/battle/catalog.json"
+    ]
+  },
+  "buttons": {
+    "character_battle_command_bar.spell": {
+      "label": "法术",
+      "semantic_action": "open_spell_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_spell_panel"
+      ],
+      "notes": "角色战斗主指令栏中的法术入口。"
+    },
+    "character_battle_command_bar.item": {
+      "label": "道具",
+      "semantic_action": "open_item_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_item_panel"
+      ],
+      "notes": "角色战斗主指令栏中的道具入口。"
+    },
+    "character_battle_command_bar.defend": {
+      "label": "防御",
+      "semantic_action": "queue_defend_action",
+      "verification_status": "ready",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_none_of": [
+        "battle_action_prompt"
+      ],
+      "notes": "角色战斗主指令栏中的防御入口。"
+    },
+    "character_battle_command_bar.protect": {
+      "label": "保护",
+      "semantic_action": "select_protect_target",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_target_panel"
+      ],
+      "notes": "角色战斗主指令栏中的保护入口。"
+    },
+    "character_battle_command_bar.summon": {
+      "label": "召唤",
+      "semantic_action": "open_summon_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "角色战斗主指令栏中的召唤入口。"
+    },
+    "character_battle_command_bar.recall": {
+      "label": "召还",
+      "semantic_action": "open_recall_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "角色战斗主指令栏中的召还入口。"
+    },
+    "character_battle_command_bar.catch": {
+      "label": "捕捉",
+      "semantic_action": "select_catch_target",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_target_panel"
+      ],
+      "notes": "角色战斗主指令栏中的捕捉入口。"
+    },
+    "character_battle_command_bar.escape": {
+      "label": "逃跑",
+      "semantic_action": "queue_escape_action",
+      "verification_status": "ready",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_none_of": [
+        "battle_action_prompt"
+      ],
+      "notes": "角色战斗主指令栏中的逃跑入口，确认信号同样使用战斗指令栏消失。"
+    },
+    "pet_battle_command_bar.spell": {
+      "label": "法术",
+      "semantic_action": "open_pet_spell_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "宠物战斗指令中的法术入口，后续需补宠物技能面板模板。"
+    },
+    "pet_battle_command_bar.item": {
+      "label": "道具",
+      "semantic_action": "open_pet_item_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_item_panel"
+      ],
+      "notes": "宠物战斗指令中的道具入口。"
+    },
+    "pet_battle_command_bar.defend": {
+      "label": "防御",
+      "semantic_action": "queue_pet_defend_action",
+      "verification_status": "ready",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_none_of": [
+        "battle_action_prompt"
+      ],
+      "notes": "宠物战斗防御同样以指令栏消失作为即时确认信号。"
+    },
+    "pet_battle_command_bar.protect": {
+      "label": "保护",
+      "semantic_action": "select_pet_protect_target",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_target_panel"
+      ],
+      "notes": "宠物战斗保护需要目标选择模板后再正式确认。"
+    },
+    "battle_command_bar.spell": {
+      "label": "法术",
+      "semantic_action": "open_spell_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_spell_panel"
+      ],
+      "notes": "语义来自战斗指令栏顶部入口，当前资料库缺少法术面板模板。"
+    },
+    "battle_command_bar.item": {
+      "label": "道具",
+      "semantic_action": "open_item_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_item_panel"
+      ],
+      "notes": "不能只看 frame_changed，后续需补道具面板模板。"
+    },
+    "battle_command_bar.defend": {
+      "label": "防御",
+      "semantic_action": "queue_defend_action",
+      "verification_status": "ready",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_none_of": [
+        "battle_action_prompt"
+      ],
+      "notes": "防御属于立即排入本回合动作，确认信号使用战斗指令栏消失。"
+    },
+    "battle_command_bar.protect": {
+      "label": "保护",
+      "semantic_action": "select_protect_target",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_target_panel"
+      ],
+      "notes": "保护通常进入目标选择，后续需补目标选择模板。"
+    },
+    "battle_command_bar.summon": {
+      "label": "召唤",
+      "semantic_action": "open_summon_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "当前资料库缺少召唤兽面板模板。"
+    },
+    "battle_command_bar.recall": {
+      "label": "召还",
+      "semantic_action": "open_recall_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "当前资料库缺少召还/召唤兽面板模板。"
+    },
+    "battle_command_bar.catch": {
+      "label": "捕捉",
+      "semantic_action": "select_catch_target",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_target_panel"
+      ],
+      "notes": "捕捉通常进入目标选择，后续需补目标选择模板。"
+    },
+    "battle_command_bar.escape": {
+      "label": "逃跑",
+      "semantic_action": "queue_escape_action",
+      "verification_status": "ready",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_none_of": [
+        "battle_action_prompt"
+      ],
+      "notes": "旧兼容键下的逃跑入口，确认信号使用战斗指令栏消失。"
+    },
+    "battle_command_bar.pet": {
+      "label": "宝宝",
+      "semantic_action": "open_pet_quick_panel",
+      "verification_status": "blocked_by_missing_template",
+      "before_any_of": [
+        "battle_action_prompt"
+      ],
+      "after_any_of": [
+        "battle_pet_panel"
+      ],
+      "notes": "当前资料库缺少宝宝快捷面板模板。"
+    }
+  }
+}

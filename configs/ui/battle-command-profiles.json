@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "profiles": {
+    "character_battle_command_bar": {
+      "label": "角色战斗指令",
+      "group": "character_battle_command_bar",
+      "menu_button_names": [
+        "spell",
+        "item",
+        "defend",
+        "protect",
+        "summon",
+        "recall",
+        "catch",
+        "escape"
+      ],
+      "labels_by_name": {
+        "spell": "法术",
+        "item": "道具",
+        "defend": "防御",
+        "protect": "保护",
+        "summon": "召唤",
+        "recall": "召还",
+        "catch": "捕捉",
+        "escape": "逃跑"
+      },
+      "notes": "角色战斗指令只包含右侧主指令菜单。"
+    },
+    "pet_battle_command_bar": {
+      "label": "宠物战斗指令",
+      "group": "pet_battle_command_bar",
+      "menu_button_names": [
+        "spell",
+        "item",
+        "defend",
+        "protect"
+      ],
+      "labels_by_name": {
+        "spell": "法术",
+        "item": "道具",
+        "defend": "防御",
+        "protect": "保护"
+      },
+      "notes": "宠物战斗指令按截图确认，仅包含法术、道具、防御、保护四项。"
+    }
+  }
+}

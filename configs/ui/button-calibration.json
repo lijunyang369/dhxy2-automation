@@ -1,0 +1,249 @@
+{
+  "version": 3,
+  "nonbattle_toolbar": {
+    "baseline_y": 802,
+    "layout": {
+      "start_x": 870,
+      "step_x": 40,
+      "y": 802,
+      "notes": "normalized from confirmed live points; fixed-size toolbar buttons"
+    },
+    "buttons": {
+      "thousand_autumn_book": {
+        "label": "千秋册",
+        "status": "confirmed",
+        "point": [
+          870,
+          802
+        ]
+      },
+      "pet_panel": {
+        "label": "宝宝",
+        "status": "confirmed",
+        "point": [
+          910,
+          802
+        ],
+        "notes": "confirmed by live UI feedback: prompt says no pet available"
+      },
+      "bag_panel": {
+        "label": "道具",
+        "status": "confirmed",
+        "point": [
+          950,
+          802
+        ],
+        "notes": "confirmed by screenshot: item panel opened"
+      },
+      "team_panel": {
+        "label": "组队",
+        "status": "confirmed",
+        "point": [
+          990,
+          802
+        ],
+        "notes": "normalized to layout grid; team popup was confirmed at adjacent point"
+      },
+      "attack_mode": {
+        "label": "攻击",
+        "status": "confirmed",
+        "point": [
+          1030,
+          802
+        ]
+      },
+      "ingot_panel": {
+        "label": "元宝",
+        "status": "confirmed",
+        "point": [
+          1070,
+          802
+        ]
+      },
+      "market_panel": {
+        "label": "商会",
+        "status": "confirmed",
+        "point": [
+          1110,
+          802
+        ]
+      },
+      "skill_panel": {
+        "label": "技能",
+        "status": "confirmed",
+        "point": [
+          1150,
+          802
+        ],
+        "notes": "confirmed by screenshot: skill panel opened"
+      },
+      "mount_panel": {
+        "label": "坐骑",
+        "status": "confirmed",
+        "point": [
+          1190,
+          802
+        ],
+        "notes": "normalized to layout grid; mount popup was confirmed at adjacent point"
+      },
+      "task_panel": {
+        "label": "任务",
+        "status": "confirmed",
+        "point": [
+          1230,
+          802
+        ],
+        "notes": "confirmed in handoff checklist for nonbattle toolbar"
+      },
+      "friend_panel": {
+        "label": "好友",
+        "status": "confirmed",
+        "point": [
+          1270,
+          802
+        ],
+        "notes": "confirmed by live scan + click probe (toolbar-friend-scan / toolbar-friend-confirm)"
+      },
+      "guild_panel": {
+        "label": "帮派",
+        "status": "confirmed",
+        "point": [
+          1310,
+          802
+        ]
+      },
+      "system_panel": {
+        "label": "系统",
+        "status": "confirmed",
+        "point": [
+          1350,
+          802
+        ],
+        "notes": "confirmed in handoff checklist for nonbattle toolbar"
+      }
+    }
+  },
+  "battle_command_bar": {
+    "layout": {
+      "x": 1252,
+      "start_y": 246,
+      "step_y": 51,
+      "notes": "grid inferred from battle command bar anchors: item(297) and defend(348)"
+    },
+    "buttons": {
+      "spell": {
+        "label": "法术",
+        "status": "confirmed",
+        "point": [
+          1300,
+          295
+        ],
+        "notes": "grid-inferred candidate"
+      },
+      "defend": {
+        "label": "防御",
+        "status": "confirmed",
+        "point": [
+          1300,
+          355
+        ],
+        "notes": "confirmed by live scan + click probe (battle-defend-scan / battle-defend-confirm)"
+      },
+      "item": {
+        "label": "道具",
+        "status": "confirmed",
+        "point": [
+          1300,
+          325
+        ]
+      },
+      "protect": {
+        "label": "保护",
+        "status": "confirmed",
+        "point": [
+          1300,
+          385
+        ],
+        "notes": "grid-inferred candidate"
+      },
+      "summon": {
+        "label": "召唤",
+        "status": "confirmed",
+        "point": [
+          1300,
+          405
+        ],
+        "notes": "grid-inferred candidate"
+      },
+      "recall": {
+        "label": "召还",
+        "status": "confirmed",
+        "point": [
+          1300,
+          430
+        ],
+        "notes": "grid-inferred candidate"
+      },
+      "catch": {
+        "label": "捕捉",
+        "status": "confirmed",
+        "point": [
+          1300,
+          455
+        ],
+        "notes": "grid-inferred candidate"
+      },
+      "escape": {
+        "label": "逃跑",
+        "status": "confirmed",
+        "point": [
+          1300,
+          480
+        ],
+        "notes": "grid-inferred candidate"
+      }
+    }
+  },
+  "pet_battle_command_bar": {
+    "layout": {
+      "x": 1300,
+      "start_y": 295,
+      "step_y": 30,
+      "notes": "seeded from confirmed pet battle command screenshot; top-to-bottom rows are spell/item/defend/protect"
+    },
+    "buttons": {
+      "spell": {
+        "label": "法术",
+        "status": "confirmed",
+        "point": [
+          1300,
+          405
+        ]
+      },
+      "item": {
+        "label": "道具",
+        "status": "confirmed",
+        "point": [
+          1300,
+          430
+        ]
+      },
+      "defend": {
+        "label": "防御",
+        "status": "confirmed",
+        "point": [
+          1300,
+          455
+        ]
+      },
+      "protect": {
+        "label": "保护",
+        "status": "confirmed",
+        "point": [
+          1300,
+          480
+        ]
+      }
+    }
+  }
+}

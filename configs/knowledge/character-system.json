@@ -1,0 +1,51 @@
+{
+  "source": [
+    {
+      "page": "人物属性",
+      "url": "https://dh2.baike.163.com/ziliao/44.html",
+      "updated_at": "2014-07-29 06:12:50"
+    },
+    {
+      "page": "抗性和抗性上限",
+      "url": "https://dh2.baike.163.com/ziliao/43.html",
+      "updated_at": "2014-07-29 06:11:14"
+    },
+    {
+      "page": "转生系统",
+      "url": "https://dh2.baike.163.com/ziliao/45.html",
+      "updated_at": "2014-09-03 03:26:21"
+    }
+  ],
+  "domain": "character_system",
+  "base_attributes": [
+    "根骨",
+    "灵性",
+    "力量",
+    "敏捷"
+  ],
+  "derived_attributes": [
+    "HP",
+    "MP",
+    "AP",
+    "SP"
+  ],
+  "resistance_caps": {
+    "before_flying": {
+      "仙族": {
+        "抗人法/遗忘": 110
+      },
+      "魔族": {
+        "抗人法/遗忘": 110
+      },
+      "人族": {
+        "抗人法/遗忘": 140
+      }
+    }
+  },
+  "rebirth_effects": [
+    "技能熟练度上限提升",
+    "保留部分熟练度",
+    "赠送转生后初始等级",
+    "提升经验兑换属性点上限"
+  ]
+}

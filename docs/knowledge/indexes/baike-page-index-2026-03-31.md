@@ -1,0 +1,270 @@
+# 百科页面索引（2026-03-31）
+
+## 说明
+
+- 来源：[dh2.baike.163.com](https://dh2.baike.163.com/)
+- 用途：作为页面定位层，快速确认某条规则或玩法对应的原始页面。
+- 只保留栏目、标题、链接、更新时间，不承载摘要解释。
+
+## 游戏准备
+
+- [玩家礼包](https://dh2.baike.163.com/ziliao/459.html)
+  更新时间：2015-10-22 15:23:25
+- [新服预约](https://dh2.baike.163.com/ziliao/457.html)
+  更新时间：2015-10-22 06:01:00
+- [游戏物品](https://dh2.baike.163.com/ziliao/456.html)
+  更新时间：2015-10-22 05:53:41
+
+## 基础介绍
+
+- [大话西游2玩家守则](https://dh2.baike.163.com/ziliao/502.html)
+  更新时间：2023-09-15 15:35:13
+- [龙族门派](https://dh2.baike.163.com/ziliao/624.html)
+  更新时间：2021-02-05 21:41:19
+- [龙族门派](https://dh2.baike.163.com/ziliao/594.html)
+  更新时间：2019-08-29 17:11:34
+- [《大话西游2免费版》最终用户使用许可协议](https://dh2.baike.163.com/ziliao/503.html)
+  更新时间：2016-07-28 05:11:44
+- [《大话西游2免费版》服务条款](https://dh2.baike.163.com/ziliao/504.html)
+  更新时间：2016-07-28 04:57:48
+- [账号安全](https://dh2.baike.163.com/ziliao/455.html)
+  更新时间：2015-10-22 05:49:45
+- [游戏背景](https://dh2.baike.163.com/ziliao/454.html)
+  更新时间：2015-10-22 05:43:14
+
+## 新手入门
+
+- [时装](https://dh2.baike.163.com/ziliao/481.html)
+  更新时间：2021-05-05 15:42:44
+- [自由改名](https://dh2.baike.163.com/ziliao/497.html)
+  更新时间：2015-10-23 06:37:53
+- [腾云系统](https://dh2.baike.163.com/ziliao/489.html)
+  更新时间：2015-10-23 06:17:14
+- [天宫寻宝](https://dh2.baike.163.com/ziliao/474.html)
+  更新时间：2015-10-22 17:07:35
+- [三界答题](https://dh2.baike.163.com/ziliao/473.html)
+  更新时间：2015-10-22 17:03:26
+- [千秋册](https://dh2.baike.163.com/ziliao/471.html)
+  更新时间：2015-10-22 16:26:05
+- [快捷键](https://dh2.baike.163.com/ziliao/470.html)
+  更新时间：2015-10-22 16:23:14
+- [组队探险](https://dh2.baike.163.com/ziliao/469.html)
+  更新时间：2015-10-22 16:43:02
+- [点卡交易](https://dh2.baike.163.com/ziliao/468.html)
+  更新时间：2015-10-22 16:36:21
+- [钱庄加锁](https://dh2.baike.163.com/ziliao/467.html)
+  更新时间：2015-10-22 16:30:39
+- [转换种族](https://dh2.baike.163.com/ziliao/466.html)
+  更新时间：2015-10-22 16:17:14
+- [基本操作](https://dh2.baike.163.com/ziliao/465.html)
+  更新时间：2015-10-22 16:06:39
+- [游戏界面](https://dh2.baike.163.com/ziliao/464.html)
+  更新时间：2015-10-22 16:03:28
+- [大话西游2免费版【新手须知】](https://dh2.baike.163.com/ziliao/351.html)
+  更新时间：2015-04-16 06:02:18
+
+## 角色系统
+
+- [人族门派](https://dh2.baike.163.com/ziliao/41.html)
+  更新时间：2022-09-29 17:27:14
+- [魔族门派](https://dh2.baike.163.com/ziliao/40.html)
+  更新时间：2022-09-29 17:22:21
+- [新男魔：绝影魔](https://dh2.baike.163.com/ziliao/569.html)
+  更新时间：2016-07-31 15:30:18
+- [新女魔：霜月灵](https://dh2.baike.163.com/ziliao/568.html)
+  更新时间：2016-07-31 15:29:24
+- [新男人：神秀生](https://dh2.baike.163.com/ziliao/567.html)
+  更新时间：2016-07-31 15:28:09
+- [新女人：玲珑女](https://dh2.baike.163.com/ziliao/566.html)
+  更新时间：2016-07-31 15:26:54
+- [新男仙：青阳使](https://dh2.baike.163.com/ziliao/565.html)
+  更新时间：2016-07-31 15:25:38
+- [新女仙：云中君](https://dh2.baike.163.com/ziliao/564.html)
+  更新时间：2016-07-31 15:24:29
+- [新男鬼：南冠客](https://dh2.baike.163.com/ziliao/563.html)
+  更新时间：2016-07-31 15:23:07
+- [新女鬼：镜花影](https://dh2.baike.163.com/ziliao/562.html)
+  更新时间：2016-07-31 15:21:55
+- [新女鬼：镜花影](https://dh2.baike.163.com/ziliao/561.html)
+  更新时间：2016-07-31 15:16:06
+- [转生修正](https://dh2.baike.163.com/ziliao/46.html)
+  更新时间：2014-09-03 03:45:49
+- [大话2主角设定-鬼族](https://dh2.baike.163.com/ziliao/208.html)
+  更新时间：2014-09-01 06:30:26
+- [大话2主角设定-仙族](https://dh2.baike.163.com/ziliao/207.html)
+  更新时间：2014-09-01 06:27:28
+- [大话2主角设定-魔族](https://dh2.baike.163.com/ziliao/206.html)
+  更新时间：2014-09-01 06:25:30
+- [大话2主角设定-人族](https://dh2.baike.163.com/ziliao/205.html)
+  更新时间：2014-09-01 06:16:57
+- [大话2主角设定](https://dh2.baike.163.com/ziliao/204.html)
+  更新时间：2014-09-01 03:58:51
+- [转生系统](https://dh2.baike.163.com/ziliao/45.html)
+  更新时间：2014-09-03 03:26:21
+- [人物属性](https://dh2.baike.163.com/ziliao/44.html)
+  更新时间：2014-07-29 06:12:50
+- [抗性和抗性上限](https://dh2.baike.163.com/ziliao/43.html)
+  更新时间：2014-07-29 06:11:14
+- [仙族门派](https://dh2.baike.163.com/ziliao/42.html)
+  更新时间：2014-07-29 06:04:47
+- [鬼族门派](https://dh2.baike.163.com/ziliao/39.html)
+  更新时间：2014-07-29 05:44:59
+- [游戏角色](https://dh2.baike.163.com/ziliao/32.html)
+  更新时间：2014-07-29 05:15:45
+
+## 召唤兽系统
+
+- [礼包召唤兽](https://dh2.baike.163.com/ziliao/612.html)
+  更新时间：2025-01-13 18:18:26
+- [天书召唤兽](https://dh2.baike.163.com/ziliao/611.html)
+  更新时间：2020-03-29 17:36:55
+- [鎏金宝鉴召唤兽](https://dh2.baike.163.com/ziliao/604.html)
+  更新时间：2020-03-27 21:10:07
+- [神兽系统](https://dh2.baike.163.com/ziliao/603.html)
+  更新时间：2020-03-27 19:42:37
+- [坐骑饰品](https://dh2.baike.163.com/ziliao/593.html)
+  更新时间：2019-02-18 10:07:14
+- [座驾系统](https://dh2.baike.163.com/ziliao/499.html)
+  更新时间：2017-05-26 15:05:39
+- [召唤兽系统](https://dh2.baike.163.com/ziliao/14.html)
+  更新时间：2017-05-26 15:00:19
+- [召唤兽饰品](https://dh2.baike.163.com/ziliao/590.html)
+  更新时间：2017-04-27 10:32:59
+- [炼兽系统](https://dh2.baike.163.com/ziliao/507.html)
+  更新时间：2016-05-31 03:28:14
+- [跨服比斗规则](https://dh2.baike.163.com/ziliao/586.html)
+  更新时间：2016-12-06 08:59:31
+- [召唤兽技能修炼](https://dh2.baike.163.com/ziliao/486.html)
+  更新时间：2015-10-23 05:56:58
+- [神兽系统](https://dh2.baike.163.com/ziliao/485.html)
+  更新时间：2015-10-23 05:53:00
+- [天书召唤兽](https://dh2.baike.163.com/ziliao/484.html)
+  更新时间：2015-10-23 05:48:44
+- [召唤兽携带限制](https://dh2.baike.163.com/ziliao/483.html)
+  更新时间：2015-10-23 05:44:05
+
+## 装备系统
+
+- [戒指](https://dh2.baike.163.com/ziliao/648.html)
+  更新时间：2021-03-03 16:41:27
+- [护身符](https://dh2.baike.163.com/ziliao/647.html)
+  更新时间：2021-03-03 16:27:42
+- [护身符](https://dh2.baike.163.com/ziliao/633.html)
+  更新时间：2021-03-03 16:25:15
+- [佩饰装备](https://dh2.baike.163.com/ziliao/625.html)
+  更新时间：2021-02-21 11:26:18
+- [套装系统](https://dh2.baike.163.com/ziliao/627.html)
+  更新时间：2021-02-08 12:24:31
+- [装备分解](https://dh2.baike.163.com/ziliao/626.html)
+  更新时间：2021-02-08 12:17:48
+- [仙器系统](https://dh2.baike.163.com/ziliao/30.html)
+  更新时间：2017-05-25 15:53:39
+- [装备点化](https://dh2.baike.163.com/ziliao/589.html)
+  更新时间：2017-04-27 10:04:50
+- [装备系统](https://dh2.baike.163.com/ziliao/1.html)
+  更新时间：2017-04-27 09:54:57
+- [装备强化](https://dh2.baike.163.com/ziliao/577.html)
+  更新时间：2016-09-26 10:33:15
+- [步风追影](https://dh2.baike.163.com/ziliao/571.html)
+  更新时间：2016-08-05 10:47:29
+- [炼兽系统](https://dh2.baike.163.com/ziliao/506.html)
+  更新时间：2016-05-31 03:11:06
+- [3级装备属性及炼化](https://dh2.baike.163.com/ziliao/501.html)
+  更新时间：2016-04-01 05:35:14
+- [仙器属性及炼化](https://dh2.baike.163.com/ziliao/500.html)
+  更新时间：2016-04-01 03:54:32
+- [作坊系统](https://dh2.baike.163.com/ziliao/480.html)
+  更新时间：2015-10-23 05:12:40
+- [高级装备基本属性及炼化](https://dh2.baike.163.com/ziliao/427.html)
+  更新时间：2015-09-09 10:34:46
+- [仙器鞋子基础属性及炼化](https://dh2.baike.163.com/ziliao/420.html)
+  更新时间：2015-09-09 03:18:41
+- [仙器项链基础属性与炼化](https://dh2.baike.163.com/ziliao/419.html)
+  更新时间：2015-09-09 03:14:59
+- [『西游攻略组』装备属性哪家强？攻略组来帮您忙。（男鬼篇）](https://dh2.baike.163.com/ziliao/398.html)
+  更新时间：2015-07-01 04:03:50
+- [『西游攻略组』打造一个合格的男人](https://dh2.baike.163.com/ziliao/368.html)
+  更新时间：2015-04-28 06:38:40
+- [各种价值炉子炼化属性表](https://dh2.baike.163.com/ziliao/367.html)
+  更新时间：2015-04-28 05:58:32
+- [翅膀炼化属性表](https://dh2.baike.163.com/ziliao/299.html)
+  更新时间：2014-10-22 07:31:46
+- [660炼化价值属性](https://dh2.baike.163.com/ziliao/298.html)
+  更新时间：2014-10-22 07:23:47
+- [720炼化价值属性表](https://dh2.baike.163.com/ziliao/297.html)
+  更新时间：2014-10-22 07:15:50
+- [780炼化价值属性表](https://dh2.baike.163.com/ziliao/296.html)
+  更新时间：2014-10-22 07:06:34
+- [840炼化价值属性表](https://dh2.baike.163.com/ziliao/295.html)
+  更新时间：2014-10-22 06:59:49
+- [1级高级装备最佳属性表及强化属性一览](https://dh2.baike.163.com/ziliao/107.html)
+  更新时间：2014-08-06 07:52:55
+- [2级高级装备的最佳属性表及强化属性表一览](https://dh2.baike.163.com/ziliao/108.html)
+  更新时间：2014-08-06 07:53:28
+
+## 系统玩法
+
+- [挖宝封妖概率公示](https://dh2.baike.163.com/ziliao/667.html)
+  更新时间：2025-03-04 17:33:05
+- [天罡星挑战](https://dh2.baike.163.com/ziliao/645.html)
+  更新时间：2022-09-30 11:41:28
+- [科举答题](https://dh2.baike.163.com/ziliao/472.html)
+  更新时间：2022-08-23 19:09:42
+- [混沌之冢](https://dh2.baike.163.com/ziliao/664.html)
+  更新时间：2022-06-21 20:44:54
+- [斗转星移](https://dh2.baike.163.com/ziliao/663.html)
+  更新时间：2022-06-21 20:26:00
+- [荒漠寻踪](https://dh2.baike.163.com/ziliao/659.html)
+  更新时间：2022-03-23 11:10:54
+- [魔王窟副本](https://dh2.baike.163.com/ziliao/587.html)
+  更新时间：2021-07-08 09:48:28
+- [秦陵幽宫](https://dh2.baike.163.com/ziliao/654.html)
+  更新时间：2021-06-22 17:58:19
+- [画窟幻域](https://dh2.baike.163.com/ziliao/653.html)
+  更新时间：2021-06-22 17:54:30
+- [神秘BOSS](https://dh2.baike.163.com/ziliao/649.html)
+  更新时间：2021-06-21 18:44:11
+- [三界妖王](https://dh2.baike.163.com/ziliao/630.html)
+  更新时间：2021-01-14 15:44:17
+- [地煞星](https://dh2.baike.163.com/ziliao/646.html)
+  更新时间：2020-05-07 11:07:52
+- [自走棋](https://dh2.baike.163.com/ziliao/644.html)
+  更新时间：2020-04-09 21:02:51
+- [饕餮美食](https://dh2.baike.163.com/ziliao/628.html)
+  更新时间：2020-03-03 16:54:07
+- [天降灵猴](https://dh2.baike.163.com/ziliao/605.html)
+  更新时间：2020-02-12 16:04:37
+- [宝库寻兽](https://dh2.baike.163.com/ziliao/588.html)
+  更新时间：2020-01-16 17:01:10
+- [帮战系统](https://dh2.baike.163.com/ziliao/364.html)
+  更新时间：2019-10-11 08:35:03
+- [坐骑系统](https://dh2.baike.163.com/ziliao/498.html)
+  更新时间：2019-09-12 09:45:43
+- [《阴阳解卦》玩法介绍](https://dh2.baike.163.com/ziliao/379.html)
+  更新时间：2019-08-22 15:15:12
+- [靓号信笺](https://dh2.baike.163.com/ziliao/576.html)
+  更新时间：2016-09-22 03:42:37
+- [六大飞行器：莲](https://dh2.baike.163.com/ziliao/496.html)
+  更新时间：2015-10-23 06:58:41
+- [六大飞行器：毯](https://dh2.baike.163.com/ziliao/494.html)
+  更新时间：2015-10-23 06:55:22
+- [六大飞行器：幡](https://dh2.baike.163.com/ziliao/495.html)
+  更新时间：2015-10-23 06:56:58
+- [六大飞行器：筝](https://dh2.baike.163.com/ziliao/493.html)
+  更新时间：2015-10-23 06:53:12
+- [六大飞行器：云](https://dh2.baike.163.com/ziliao/492.html)
+  更新时间：2015-10-23 06:51:00
+- [六大飞行器：羽](https://dh2.baike.163.com/ziliao/491.html)
+  更新时间：2015-10-23 06:49:35
+- [六大飞行器：扇](https://dh2.baike.163.com/ziliao/490.html)
+  更新时间：2015-10-23 06:48:11
+- [五行系统](https://dh2.baike.163.com/ziliao/487.html)
+  更新时间：2015-10-23 06:02:06
+- [法术熟练度](https://dh2.baike.163.com/ziliao/479.html)
+  更新时间：2015-10-23 05:09:08
+- [活力值](https://dh2.baike.163.com/ziliao/478.html)
+  更新时间：2015-10-23 05:00:58
+- [声望值](https://dh2.baike.163.com/ziliao/477.html)
+  更新时间：2015-10-23 04:52:46
+- [随身小铺](https://dh2.baike.163.com/ziliao/476.html)
+  更新时间：2015-10-23 04:47:42

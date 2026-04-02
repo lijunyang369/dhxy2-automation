@@ -1,0 +1,42 @@
+{
+  "source": {
+    "site": "dh2.baike.163.com",
+    "page": "基本操作",
+    "url": "https://dh2.baike.163.com/ziliao/465.html",
+    "updated_at": "2015-10-22 16:06:39"
+  },
+  "domain": "ui_control",
+  "rules": [
+    {
+      "rule_id": "ui.basic.left_click_move",
+      "scene": "nonbattle",
+      "action": "left_click_ground",
+      "result": "character_walk",
+      "notes": "左键点击地面移动角色。"
+    },
+    {
+      "rule_id": "ui.basic.right_click_run",
+      "scene": "nonbattle",
+      "action": "right_click_ground",
+      "result": "character_run",
+      "notes": "右键点击地面使角色跑动。"
+    },
+    {
+      "rule_id": "battle.basic.left_click_attack",
+      "scene": "battle",
+      "action": "left_click_target",
+      "result": "physical_attack",
+      "notes": "战斗中左键点目标执行物理攻击。"
+    },
+    {
+      "rule_id": "battle.basic.use_spell",
+      "scene": "battle",
+      "preconditions": [
+        "spell_panel_open"
+      ],
+      "action": "select_spell_then_click_target",
+      "result": "spell_attack",
+      "notes": "先选法术再点目标。"
+    }
+  ]
+}

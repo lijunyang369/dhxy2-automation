@@ -1,0 +1,49 @@
+{
+  "source": [
+    {
+      "page": "装备系统",
+      "url": "https://dh2.baike.163.com/ziliao/1.html",
+      "updated_at": "2017-04-27 09:54:57"
+    },
+    {
+      "page": "仙器系统",
+      "url": "https://dh2.baike.163.com/ziliao/30.html",
+      "updated_at": "2017-05-25 15:53:39"
+    },
+    {
+      "page": "套装系统",
+      "url": "https://dh2.baike.163.com/ziliao/627.html",
+      "updated_at": "2021-02-08 12:24:31"
+    }
+  ],
+  "domain": "equipment_system",
+  "entry_points": [
+    {
+      "type": "npc",
+      "name": "铁匠",
+      "operations": [
+        "合成",
+        "重铸",
+        "升级"
+      ]
+    }
+  ],
+  "xianqi": {
+    "tiers": [
+      1,
+      2
+    ],
+    "progression_actions": [
+      "强化",
+      "炼化",
+      "升阶"
+    ],
+    "key_materials": [
+      "八荒遗风"
+    ]
+  },
+  "suit_system": {
+    "composition": "装备 + 套装玉符",
+    "effect_rule": "同套多部件同时使用可触发套装技能"
+  }
+}
