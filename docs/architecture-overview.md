@@ -10,6 +10,11 @@
 - 尚未进入业务脚本实施
 - 需要先完成框架设计，再分阶段落地
 
+配套图示文档：
+
+- [模块拆解图](D:\Codex\dhxy2-automation\docs\module-breakdown-mindmap.md)
+- [服务架构图](D:\Codex\dhxy2-automation\docs\service-architecture.md)
+
 ## 2. 当前基线
 
 已完成基线：

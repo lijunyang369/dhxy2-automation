@@ -44,27 +44,52 @@
   "regions": [
     {
       "name": "battle_main",
-      "rect": [0, 100, 180, 150],
+      "rect": [
+        0,
+        100,
+        180,
+        150
+      ],
       "use_template_match": false
     },
     {
       "name": "round_number_region",
-      "rect": [0, 100, 180, 150],
+      "rect": [
+        0,
+        100,
+        180,
+        150
+      ],
       "use_template_match": false
     },
     {
       "name": "battle_auto_button",
-      "rect": [1290, 700, 1368, 750],
+      "rect": [
+        1290,
+        700,
+        1368,
+        750
+      ],
       "use_template_match": true
     },
     {
       "name": "battle_prompt",
-      "rect": [1170, 245, 1320, 530],
+      "rect": [
+        1170,
+        245,
+        1320,
+        530
+      ],
       "use_template_match": true
     },
     {
       "name": "skill_bar",
-      "rect": [950, 680, 1378, 831],
+      "rect": [
+        950,
+        680,
+        1378,
+        831
+      ],
       "use_template_match": true
     }
   ],

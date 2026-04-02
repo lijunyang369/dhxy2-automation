@@ -92,6 +92,12 @@ class ManualCoordinateProbeApp:
         self._auto_feedback_var = tk.StringVar(value="")
         self._auto_session_var = tk.StringVar(value="")
         self._auto_runtime_log_var = tk.StringVar(value="")
+        self._auto_session_display_var = tk.StringVar(value="暂无会话")
+        self._auto_runtime_log_display_var = tk.StringVar(value="未生成运行日志")
+        self._auto_scene_var = tk.StringVar(value="")
+        self._auto_round_var = tk.StringVar(value="")
+        self._auto_plan_var = tk.StringVar(value="")
+        self._auto_evidence_var = tk.StringVar(value="")
         self._recognition_module_id_var = tk.StringVar(value="")
         self._recognition_region_var = tk.StringVar(value="")
         self._recognition_mode_var = tk.StringVar(value="")
@@ -105,6 +111,9 @@ class ManualCoordinateProbeApp:
         self._recognition_config_path_var = tk.StringVar(
             value=str(self._recognition_workbench_service.scenario_config_path)
         )
+        self._recognition_config_display_var = tk.StringVar(
+            value=self._display_path(self._recognition_workbench_service.scenario_config_path)
+        )
         self._recognition_full_path_var = tk.StringVar(value="")
         self._recognition_crop_path_var = tk.StringVar(value="")
         self._recognition_template_path_var = tk.StringVar(value="")
@@ -117,16 +126,20 @@ class ManualCoordinateProbeApp:
         self._battle_log_widget: tk.Text | None = None
         self._recognition_log_widget: tk.Text | None = None
         self._recognition_listbox: tk.Listbox | None = None
+        self._home_status_badge_label: ttk.Label | None = None
+        self._auto_status_badge_label: ttk.Label | None = None
         self._before_preview_label: ttk.Label | None = None
         self._after_preview_label: ttk.Label | None = None
         self._recognition_full_preview_label: ttk.Label | None = None
         self._recognition_crop_preview_label: ttk.Label | None = None
         self._recognition_template_preview_label: ttk.Label | None = None
+        self._auto_evidence_preview_label: ttk.Label | None = None
         self._before_preview_image: ImageTk.PhotoImage | None = None
         self._after_preview_image: ImageTk.PhotoImage | None = None
         self._recognition_full_preview_image: ImageTk.PhotoImage | None = None
         self._recognition_crop_preview_image: ImageTk.PhotoImage | None = None
         self._recognition_template_preview_image: ImageTk.PhotoImage | None = None
+        self._auto_evidence_preview_image: ImageTk.PhotoImage | None = None
 
         configure_workbench_theme(self._root)
         self._root.title("大话西游2自动化运行平台")
@@ -138,7 +151,8 @@ class ManualCoordinateProbeApp:
         self._hot_reload_mtimes = _snapshot_file_mtimes(self._hot_reload_source_paths + self._hot_reload_config_paths)
 
         self._build()
-        self._append_home_log("INFO", f"tool_started config={self._calibration_store.path}")
+        self._refresh_status_badges()
+        self._append_home_log("INFO", f"平台已启动，校准配置：{self._calibration_store.path}")
         self._reload_entries()
         self._show_page("home")
         self._schedule_hot_reload_poll()
@@ -152,13 +166,14 @@ class ManualCoordinateProbeApp:
 
         header = ttk.Frame(outer)
         header.grid(row=0, column=0, sticky="ew", pady=(0, 12))
-        header.columnconfigure(1, weight=1)
-        ttk.Label(header, text="大话西游2自动化运行平台", style="Title.TLabel").grid(
+        header.columnconfigure(2, weight=1)
+        ttk.Label(header, text="大话西游2 // 自动化指挥界面", style="Title.TLabel").grid(
             row=0,
             column=0,
             sticky="w",
         )
-        ttk.Label(header, textvariable=self._summary_var, style="Muted.TLabel").grid(row=0, column=1, sticky="e")
+        ttk.Label(header, text="[ 桌面控制视图 ]", style="Badge.TLabel").grid(row=0, column=1, sticky="w", padx=(12, 0))
+        ttk.Label(header, textvariable=self._summary_var, style="Muted.TLabel").grid(row=0, column=2, sticky="e")
 
         body = ttk.Frame(outer)
         body.grid(row=1, column=0, sticky="nsew")
@@ -201,6 +216,28 @@ class ManualCoordinateProbeApp:
             paths.append(self._launcher_path)
         return tuple(paths)
 
+    def _display_path(self, value: str | Path) -> str:
+        path = Path(value)
+        try:
+            relative = path.relative_to(self._project_root)
+            return str(relative)
+        except Exception:
+            return path.name or str(path)
+
+    def _refresh_status_badges(self) -> None:
+        text = self._auto_status_var.get().strip() or "空闲"
+        style = "StatusIdle.TLabel"
+        if text in {"运行中"}:
+            style = "StatusRunning.TLabel"
+        elif text in {"启动失败", "轮询失败"}:
+            style = "StatusError.TLabel"
+        elif text in {"已禁用", "已停止", "已完成"}:
+            style = "StatusWarn.TLabel"
+
+        for widget in (self._home_status_badge_label, self._auto_status_badge_label):
+            if widget is not None:
+                widget.configure(text=text, style=style)
+
     def _build_hot_reload_config_paths(self) -> tuple[Path, ...]:
         paths: list[Path] = []
         for relative in (
@@ -221,7 +258,13 @@ class ManualCoordinateProbeApp:
                 frame.tkraise()
         if name == "recognition" and self._recognition_module_specs and not self._selected_recognition_module_id:
             self._select_recognition_module_by_id(self._recognition_module_specs[0].module_id)
-        self._append_home_log("INFO", f"open_page page={name}")
+        page_labels = {
+            "home": "总览页",
+            "probe": "校准台",
+            "recognition": "识别台",
+            "auto_battle": "运行台",
+        }
+        self._append_home_log("INFO", f"已切换到{page_labels.get(name, name)}")
 
     def _populate_recognition_module_listbox(self) -> None:
         if self._recognition_listbox is None:
@@ -245,7 +288,7 @@ class ManualCoordinateProbeApp:
 
     def _run_selected_recognition_capture(self) -> None:
         if not self._selected_recognition_module_id:
-            self._append_home_log("WARN", "recognition_run_skipped no_selected_module")
+            self._append_home_log("WARN", "未选择识别模块，已跳过识别执行")
             return
         self._run_recognition_capture(selected_module_id=self._selected_recognition_module_id)
 
@@ -253,7 +296,7 @@ class ManualCoordinateProbeApp:
         try:
             artifacts = self._recognition_workbench_service.run()
         except Exception as exc:
-            self._append_home_log("ERROR", f"recognition_run_failed error={exc}")
+            self._append_home_log("ERROR", f"识别执行失败：{exc}")
             self._set_recognition_log_text(f"识别失败: {exc}")
             return
 
@@ -264,8 +307,9 @@ class ManualCoordinateProbeApp:
         self._recognition_template_paths_by_module = dict(artifacts.template_paths_by_module)
         self._recognition_full_path_var.set(artifacts.screenshot_path)
         self._recognition_record_path_var.set(artifacts.record_path)
+        self._update_auto_evidence_preview(artifacts.screenshot_path)
         self._populate_recognition_module_listbox()
-        self._append_home_log("INFO", f"recognition_run_completed run={artifacts.run_id}")
+        self._append_home_log("INFO", f"识别执行完成，运行编号：{artifacts.run_id}")
 
         target_module_id = selected_module_id
         if not target_module_id or target_module_id not in self._recognition_results_by_id:
@@ -351,14 +395,14 @@ class ManualCoordinateProbeApp:
 
     def _save_recognition_region(self) -> None:
         if not self._selected_recognition_module_id:
-            self._append_home_log("WARN", "save_recognition_region_skipped no_selected_module")
+            self._append_home_log("WARN", "未选择识别模块，无法保存识别区域")
             return
         spec = next(
             (item for item in self._recognition_module_specs if item.module_id == self._selected_recognition_module_id),
             None,
         )
         if spec is None:
-            self._append_home_log("WARN", "save_recognition_region_skipped module_missing")
+            self._append_home_log("WARN", "识别模块不存在，无法保存识别区域")
             return
         try:
             rect = (
@@ -369,13 +413,13 @@ class ManualCoordinateProbeApp:
             )
             self._recognition_workbench_service.update_region_rect(spec.region_name, rect)
         except Exception as exc:
-            self._append_home_log("ERROR", f"save_recognition_region_failed error={exc}")
+            self._append_home_log("ERROR", f"保存识别区域失败：{exc}")
             self._set_recognition_log_text(f"保存区域失败: {exc}")
             return
 
         self._append_home_log(
             "INFO",
-            f"save_recognition_region module={spec.module_id} region={spec.region_name} rect={rect}",
+            f"识别区域已保存：模块={spec.module_id}，区域={spec.region_name}，范围={rect}",
         )
         self._load_recognition_region_rect(spec.region_name)
 
@@ -393,7 +437,7 @@ class ManualCoordinateProbeApp:
         except Exception as exc:
             self._recognition_round_template_status_var.set(f"failed: {exc}")
             self._set_recognition_log_text(f"保存回合数字模板失败: {exc}")
-            self._append_home_log("ERROR", f"save_round_digit_template_failed error={exc}")
+            self._append_home_log("ERROR", f"保存回合数字模板失败：{exc}")
             return
 
         self._recognition_template_paths_by_module = self._recognition_workbench_service.template_paths_by_module()
@@ -404,7 +448,7 @@ class ManualCoordinateProbeApp:
             crop_path,
             str(template_path),
         )
-        self._append_home_log("INFO", f"save_round_digit_template digit={digit} path={template_path.name}")
+        self._append_home_log("INFO", f"回合数字模板已保存：数字={digit}，文件={template_path.name}")
 
     def _update_recognition_previews(self, screenshot_path: str, crop_path: str, template_path: str) -> None:
         self._recognition_full_preview_image = self._load_preview_image(screenshot_path)
@@ -419,6 +463,12 @@ class ManualCoordinateProbeApp:
         )
         if not template_path and self._recognition_template_preview_label is not None:
             self._recognition_template_preview_label.configure(text="无模板")
+
+    def _update_auto_evidence_preview(self, image_path: str) -> None:
+        self._auto_evidence_preview_image = self._load_preview_image(image_path)
+        self._set_preview(self._auto_evidence_preview_label, self._auto_evidence_preview_image, image_path)
+        if self._auto_evidence_preview_label is not None and self._auto_evidence_preview_image is None:
+            self._auto_evidence_preview_label.configure(text="暂无识别证据图")
 
     def _add_entry(self, parent: ttk.Frame, row: int, label: str, variable: tk.StringVar) -> None:
         ttk.Label(parent, text=label).grid(row=row, column=0, sticky="w", pady=(6, 0))
@@ -444,10 +494,10 @@ class ManualCoordinateProbeApp:
         )
         self._append_home_log(
             "INFO",
-            "reload_calibration "
-            f"character_battle={len(self._refs_by_category['character_battle'])} "
-            f"pet_battle={len(self._refs_by_category['pet_battle'])} "
-            f"nonbattle={len(self._refs_by_category['nonbattle'])}",
+            "校准配置已刷新："
+            f"角色战斗={len(self._refs_by_category['character_battle'])}，"
+            f"宠物战斗={len(self._refs_by_category['pet_battle'])}，"
+            f"非战斗={len(self._refs_by_category['nonbattle'])}",
         )
 
         if self._selected_button_ref in self._entries_by_ref:
@@ -486,10 +536,10 @@ class ManualCoordinateProbeApp:
             self._notes_widget.delete("1.0", tk.END)
             if entry.notes:
                 self._notes_widget.insert("1.0", entry.notes)
-        self._result_var.set(f"loaded {entry.button_ref}")
+        self._result_var.set(f"已载入：{entry.button_ref}")
         self._append_home_log(
             "INFO",
-            f"select_button ref={entry.button_ref} label={entry.label} point=({entry.x}, {entry.y}) status={entry.status}",
+            f"已选择按钮：{entry.label}，坐标=({entry.x}, {entry.y})，状态={entry.status}",
         )
 
     def _selected_notes(self) -> str:
@@ -500,7 +550,7 @@ class ManualCoordinateProbeApp:
     def _save_calibration(self) -> None:
         if not self._selected_button_ref:
             self._result_var.set("未选择按钮")
-            self._append_home_log("WARN", "save_calibration_skipped no_selected_button")
+            self._append_home_log("WARN", "未选择按钮，无法保存校准")
             return
 
         try:
@@ -513,13 +563,13 @@ class ManualCoordinateProbeApp:
             )
         except Exception as exc:
             self._result_var.set(f"保存校准失败: {exc}")
-            self._append_home_log("ERROR", f"save_calibration_failed error={exc}")
+            self._append_home_log("ERROR", f"保存校准失败：{exc}")
             return
 
         self._reload_entries()
         self._load_entry(saved)
-        self._result_var.set(f"saved {saved.button_ref} -> ({saved.x}, {saved.y}) status={saved.status}")
-        self._append_home_log("INFO", f"save_calibration ref={saved.button_ref}")
+        self._result_var.set(f"校准已保存：{saved.button_ref} -> ({saved.x}, {saved.y})，状态={saved.status}")
+        self._append_home_log("INFO", f"校准已保存：{saved.button_ref}")
 
     def _run_probe(self) -> None:
         try:
@@ -532,7 +582,7 @@ class ManualCoordinateProbeApp:
             )
         except Exception as exc:
             self._result_var.set(f"探针执行失败: {exc}")
-            self._append_home_log("ERROR", f"probe_failed error={exc}")
+            self._append_home_log("ERROR", f"点击探针执行失败：{exc}")
             return
 
         self._last_run_id = artifacts.run_id
@@ -541,18 +591,18 @@ class ManualCoordinateProbeApp:
         self._record_path_var.set(str(self._probe_service.record_path_for(artifacts.run_id)))
         self._update_image_previews(artifacts.before_path, artifacts.after_path)
         self._result_var.set(
-            f"run={artifacts.run_id} frame_changed={artifacts.frame_changed} "
-            f"screen=({artifacts.screen_x}, {artifacts.screen_y})"
+            f"探针完成：运行编号={artifacts.run_id}，画面变化={artifacts.frame_changed}，"
+            f"屏幕坐标=({artifacts.screen_x}, {artifacts.screen_y})"
         )
         self._append_home_log(
             "INFO",
-            f"probe_completed run={artifacts.run_id} before={Path(artifacts.before_path).name} after={Path(artifacts.after_path).name}",
+            f"点击探针完成：前图={Path(artifacts.before_path).name}，后图={Path(artifacts.after_path).name}",
         )
 
     def _save_feedback(self) -> None:
         if not self._last_run_id:
             self._result_var.set("没有可保存的探针记录")
-            self._append_home_log("WARN", "save_feedback_skipped no_probe_record")
+            self._append_home_log("WARN", "没有探针记录，无法保存判定")
             return
 
         try:
@@ -563,12 +613,12 @@ class ManualCoordinateProbeApp:
             )
         except Exception as exc:
             self._result_var.set(f"保存判定失败: {exc}")
-            self._append_home_log("ERROR", f"save_feedback_failed error={exc}")
+            self._append_home_log("ERROR", f"保存判定失败：{exc}")
             return
 
         self._record_path_var.set(str(record_path))
         self._result_var.set(f"判定已保存：{record_path.name}")
-        self._append_home_log("INFO", f"save_feedback run={self._last_run_id} status={self._status_var.get().strip()}")
+        self._append_home_log("INFO", f"人工判定已保存：运行编号={self._last_run_id}，状态={self._status_var.get().strip()}")
 
     def _update_image_previews(self, before_path: str, after_path: str) -> None:
         self._before_preview_image = self._load_preview_image(before_path)
@@ -600,26 +650,35 @@ class ManualCoordinateProbeApp:
     def _start_auto_battle(self) -> None:
         if not self._auto_enabled_var.get():
             self._auto_status_var.set("已禁用")
-            self._append_battle_log("自动战斗已关闭，请先勾选“开启自动战斗”。")
-            self._append_home_log("WARN", "auto_battle_start_blocked disabled")
+            self._refresh_status_badges()
+            self._append_battle_log("自动战斗已关闭，请先勾选“开启自动战斗”。", tag="warn")
+            self._append_home_log("WARN", "自动战斗未开启，已阻止启动")
             return
 
         try:
             session_root, runtime_log = self._auto_battle_service.start()
         except Exception as exc:
             self._auto_status_var.set("启动失败")
-            self._append_battle_log(f"启动失败：{exc}")
-            self._append_home_log("ERROR", f"auto_battle_start_failed error={exc}")
+            self._refresh_status_badges()
+            self._append_battle_log(f"启动失败：{exc}", tag="error")
+            self._append_home_log("ERROR", f"自动战斗启动失败：{exc}")
             return
 
         self._auto_status_var.set("运行中")
+        self._refresh_status_badges()
         self._auto_session_var.set(session_root)
         self._auto_runtime_log_var.set(runtime_log)
+        self._auto_session_display_var.set(self._display_path(session_root))
+        self._auto_runtime_log_display_var.set(self._display_path(runtime_log))
+        self._auto_scene_var.set("待识别")
+        self._auto_round_var.set("0")
+        self._auto_plan_var.set("尚未生成")
+        self._auto_evidence_var.set(session_root)
         self._last_battle_scene = ""
         self._last_battle_round_logged = 0
         self._clear_battle_log()
-        self._append_battle_log(f"自动战斗已启动，会话目录：{session_root}")
-        self._append_home_log("INFO", f"auto_battle_started session={session_root}")
+        self._append_battle_log(f"自动战斗已启动，会话目录：{session_root}", tag="state")
+        self._append_home_log("INFO", f"自动战斗已启动，会话目录：{session_root}")
         self._schedule_next_tick(200)
 
     def _stop_auto_battle(self) -> None:
@@ -628,10 +687,16 @@ class ManualCoordinateProbeApp:
             self._auto_tick_job = None
         self._auto_battle_service.stop()
         self._auto_status_var.set("已停止")
+        self._refresh_status_badges()
+        self._auto_session_display_var.set("暂无会话")
+        self._auto_runtime_log_display_var.set("未生成运行日志")
+        self._auto_scene_var.set("")
+        self._auto_round_var.set("0")
+        self._auto_plan_var.set("")
         self._last_battle_scene = ""
         self._last_battle_round_logged = 0
-        self._append_battle_log("自动战斗已停止")
-        self._append_home_log("INFO", "auto_battle_stopped")
+        self._append_battle_log("自动战斗已停止", tag="warn")
+        self._append_home_log("INFO", "自动战斗已停止")
 
     def _schedule_next_tick(self, delay_ms: int) -> None:
         if self._auto_tick_job is not None:
@@ -650,8 +715,9 @@ class ManualCoordinateProbeApp:
             report = self._auto_battle_service.run_tick()
         except Exception as exc:
             self._auto_status_var.set("轮询失败")
-            self._append_battle_log(f"轮询失败：{exc}")
-            self._append_home_log("ERROR", f"auto_battle_tick_failed error={exc}")
+            self._refresh_status_badges()
+            self._append_battle_log(f"轮询失败：{exc}", tag="error")
+            self._append_home_log("ERROR", f"自动战斗轮询失败：{exc}")
             self._auto_battle_service.stop()
             return
 
@@ -660,15 +726,20 @@ class ManualCoordinateProbeApp:
         self._auto_feedback_var.set(_feedback_label(report.feedback_reason) if report.feedback_reason else "暂无")
         self._auto_session_var.set(report.session_root)
         self._auto_runtime_log_var.set(report.runtime_log_path)
+        self._auto_session_display_var.set(self._display_path(report.session_root))
+        self._auto_runtime_log_display_var.set(self._display_path(report.runtime_log_path))
         self._append_battle_report_clean(report)
 
         if report.finished:
             self._auto_status_var.set("已完成")
-            self._append_home_log("INFO", f"auto_battle_finished tick={report.tick_index}")
+            self._refresh_status_badges()
+            self._auto_evidence_var.set(report.runtime_log_path)
+            self._append_home_log("INFO", f"自动战斗已完成，总轮次：{report.tick_index}")
             self._auto_battle_service.stop()
             return
 
         self._auto_status_var.set("运行中")
+        self._refresh_status_badges()
         self._schedule_next_tick(1200)
 
     def _append_battle_report(self, report: AutoBattleTickReport) -> None:
@@ -696,22 +767,29 @@ class ManualCoordinateProbeApp:
     def _append_battle_report_clean(self, report: AutoBattleTickReport) -> None:
         scene_observation = report.feedback_observation if report.finished and report.feedback_observation is not None else report.observation
         scene = _scene_label(scene_observation)
+        self._auto_scene_var.set(scene)
         if scene != self._last_battle_scene:
-            self._append_battle_log(f"当前场景：{scene}")
+            self._append_battle_log(f"当前场景：{scene}", tag="state")
             self._last_battle_scene = scene
 
         if not report.executed_actions:
+            if report.runtime_log_path:
+                self._auto_evidence_var.set(report.runtime_log_path)
             return
 
         round_number = max(1, report.round_index)
+        self._auto_round_var.set(str(round_number))
         if round_number != self._last_battle_round_logged:
-            self._append_battle_log(f"识别到新回合：第 {round_number} 回合")
+            self._append_battle_log(f"识别到新回合：第 {round_number} 回合", tag="state")
             self._last_battle_round_logged = round_number
 
         character_command, pet_command = _planned_command_summary(report.planned_actions)
-        self._append_battle_log(f"新回合执行策略：人物={character_command}，宠物={pet_command}")
-        self._append_battle_log(f"实际执行指令：人物={character_command}，宠物={pet_command}")
-        self._append_battle_log(f"操作完成：{_feedback_label(report.feedback_reason)}")
+        plan_summary = f"人物={character_command}，宠物={pet_command}"
+        self._auto_plan_var.set(plan_summary)
+        self._auto_evidence_var.set(report.runtime_log_path or report.session_root)
+        self._append_battle_log(f"新回合执行策略：{plan_summary}", tag="action")
+        self._append_battle_log(f"实际执行指令：{plan_summary}", tag="action")
+        self._append_battle_log(f"操作完成：{_feedback_label(report.feedback_reason)}", tag="info")
 
     def _clear_battle_log(self) -> None:
         if self._battle_log_widget is None:
@@ -722,21 +800,38 @@ class ManualCoordinateProbeApp:
 
     def _append_home_log(self, level: str, message: str) -> None:
         stamp = datetime.now().strftime("%H:%M:%S")
-        line = f"[{stamp}] {level}: {message}\n"
+        prefix = {
+            "INFO": "[信息]",
+            "WARN": "[告警]",
+            "ERROR": "[异常]",
+        }.get(level, "[信息]")
+        line = f"[{stamp}] {prefix} {message}\n"
         if self._home_log_widget is None:
             return
         self._home_log_widget.configure(state="normal")
-        self._home_log_widget.insert(tk.END, line)
+        tag = {
+            "INFO": "info",
+            "WARN": "warn",
+            "ERROR": "error",
+        }.get(level, "info")
+        self._home_log_widget.insert(tk.END, line, (tag,))
         self._home_log_widget.see(tk.END)
         self._home_log_widget.configure(state="disabled")
 
-    def _append_battle_log(self, message: str) -> None:
+    def _append_battle_log(self, message: str, *, tag: str = "info") -> None:
         stamp = datetime.now().strftime("%H:%M:%S")
-        line = f"[{stamp}] {message}\n"
+        prefix = {
+            "info": "[信息]",
+            "state": "[状态]",
+            "action": "[动作]",
+            "warn": "[告警]",
+            "error": "[异常]",
+        }.get(tag, "[信息]")
+        line = f"[{stamp}] {prefix} {message}\n"
         if self._battle_log_widget is None:
             return
         self._battle_log_widget.configure(state="normal")
-        self._battle_log_widget.insert(tk.END, line)
+        self._battle_log_widget.insert(tk.END, line, (tag,))
         self._battle_log_widget.see(tk.END)
         self._battle_log_widget.configure(state="disabled")
 
@@ -754,7 +849,7 @@ class ManualCoordinateProbeApp:
             if self._hot_reload_mtimes.get(str(path)) != current_snapshot.get(str(path))
         ]
         if changed_sources:
-            self._append_home_log("INFO", f"hot_reload_detected source={changed_sources[0].name}")
+            self._append_home_log("INFO", f"检测到源码更新，准备热重载：{changed_sources[0].name}")
             self._restart_process_for_hot_reload()
             return
 
@@ -765,9 +860,9 @@ class ManualCoordinateProbeApp:
         if changed_configs:
             self._hot_reload_mtimes = current_snapshot
             self._reload_entries()
-            self._append_home_log("INFO", f"hot_reload_applied config={changed_configs[0].name}")
+            self._append_home_log("INFO", f"配置变更已应用：{changed_configs[0].name}")
             if self._auto_battle_service.is_running:
-                self._append_battle_log("检测到配置变更：当前自动战斗继续运行，新配置将在下次启动时生效")
+                self._append_battle_log("检测到配置变更：当前自动战斗继续运行，新配置将在下次启动时生效", tag="warn")
             self._schedule_hot_reload_poll()
             return
 
@@ -776,7 +871,7 @@ class ManualCoordinateProbeApp:
 
     def _restart_process_for_hot_reload(self) -> None:
         if self._launcher_path is None:
-            self._append_home_log("WARN", "hot_reload_skipped missing_launcher")
+            self._append_home_log("WARN", "缺少启动器路径，已跳过热重载")
             self._schedule_hot_reload_poll()
             return
         subprocess.Popen(
@@ -794,7 +889,7 @@ class ManualCoordinateProbeApp:
             self._auto_tick_job = None
         self._auto_battle_service.stop()
         if not silent:
-            self._append_home_log("INFO", "tool_closed")
+            self._append_home_log("INFO", "平台已关闭")
         self._root.destroy()
 
     def _on_close(self) -> None:
